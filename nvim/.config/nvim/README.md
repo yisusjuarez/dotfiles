@@ -1,20 +1,20 @@
-	# Configuración de Neovim
+# Neovim configuration
 
-Configuración en Lua, en un solo archivo (`init.lua`), pensada para aprender poco a poco.
+Lua configuration in a single file (`init.lua`), designed to be learned step by step.
 
-## Requisitos
+## Requirements
 
-- Neovim 0.12 o superior (usa `vim.pack`, el gestor de plugins nativo, y el LSP nativo)
+- Neovim 0.12 or later (uses `vim.pack`, the native plugin manager, and the native LSP)
 - `git`
 - `fzf`
-- `ripgrep` (`rg`), necesario para buscar texto
-- `fd`, para buscar archivos
-- `tree-sitter` (CLI), para instalar los parsers
-- Una Nerd Font en la terminal, para los iconos
+- `ripgrep` (`rg`), required for text search
+- `fd`, for file search
+- `tree-sitter` (CLI), to install parsers
+- A Nerd Font in the terminal, for icons
 
-Servidores de lenguaje (LSP), deben estar en el `PATH`:
+Language servers (LSP) must be in the `PATH`:
 
-| Lenguaje | Servidor | Instalación |
+| Language | Server | Installation |
 |---|---|---|
 | Go | `gopls` | `go install golang.org/x/tools/gopls@latest` |
 | JavaScript / TypeScript | `vtsls` | `npm install -g @vtsls/language-server` |
@@ -22,24 +22,24 @@ Servidores de lenguaje (LSP), deben estar en el `PATH`:
 
 ## Plugins
 
-| Plugin | Uso |
+| Plugin | Purpose |
 |---|---|
-| [fzf-lua](https://github.com/ibhagwan/fzf-lua) | Buscar archivos y texto |
-| [nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua) | Árbol de archivos |
-| [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) | Barra de estado |
-| [dracula.nvim](https://github.com/Mofiqul/dracula.nvim) | Tema de colores |
-| [which-key.nvim](https://github.com/folke/which-key.nvim) | Popup con los atajos disponibles al presionar `Espacio` |
-| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Marca en el margen las líneas cambiadas en git |
-| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Resaltado de sintaxis (rama `main`) |
-| [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) | Iconos de archivo en el árbol, la búsqueda y la barra |
-| [mini.pairs](https://github.com/nvim-mini/mini.pairs) | Cierra automáticamente `(`, `[`, `{` y comillas |
-| [conform.nvim](https://github.com/stevearc/conform.nvim) | Formatear al guardar |
+| [fzf-lua](https://github.com/ibhagwan/fzf-lua) | Search files and text |
+| [nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua) | File tree |
+| [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) | Status line |
+| [dracula.nvim](https://github.com/Mofiqul/dracula.nvim) | Color scheme |
+| [which-key.nvim](https://github.com/folke/which-key.nvim) | Popup with available keymaps when pressing `Space` |
+| [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim) | Marks lines changed in git in the sign column |
+| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Syntax highlighting (`main` branch) |
+| [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons) | File icons in the tree, search and status line |
+| [mini.pairs](https://github.com/nvim-mini/mini.pairs) | Auto-closes `(`, `[`, `{` and quotes |
+| [conform.nvim](https://github.com/stevearc/conform.nvim) | Format on save |
 
-Las versiones instaladas quedan fijadas en `nvim-pack-lock.json`.
+Installed versions are pinned in `nvim-pack-lock.json`.
 
-## Fuente
+## Font
 
-Neovim en terminal usa la fuente de la terminal. Se define en la configuración de Ghostty (`~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`):
+Neovim in the terminal uses the terminal's font. It is set in the Ghostty config (`~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`):
 
 ```
 font-family = JetBrainsMono Nerd Font Mono
@@ -48,141 +48,141 @@ adjust-cell-height = 20%
 macos-option-as-alt = left
 ```
 
-## Atajos
+## Keymaps
 
-La tecla leader es `Espacio`. Los atajos siguen los de LazyVim solo como referencia, para que sirvan igual en caso de cambiar en el futuro. Esta configuración no instala ni depende de LazyVim.
+The leader key is `Space`. Keymaps follow LazyVim's only as a reference, so they stay the same if switching in the future. This configuration does not install or depend on LazyVim.
 
-| Atajo | Acción |
+| Keymap | Action |
 |---|---|
-| `Espacio Espacio` | Buscar archivos |
-| `Espacio ff` | Buscar archivos |
-| `Espacio /` | Buscar texto en el proyecto |
-| `Espacio sg` | Buscar texto en el proyecto |
-| `Espacio fg` | Buscar archivos de git (solo dentro de un repo git) |
-| `Espacio e` | Abrir o cerrar el árbol de archivos |
-| `Espacio qq` | Cerrar Neovim por completo (no guarda) |
-| `Ctrl-s` | Guardar el archivo (modos normal, insert y visual) |
-| `Ctrl-h` / `Ctrl-j` / `Ctrl-k` / `Ctrl-l` | Ir a la ventana izquierda / abajo / arriba / derecha |
+| `Space Space` | Find files |
+| `Space ff` | Find files |
+| `Space /` | Search text in project |
+| `Space sg` | Search text in project |
+| `Space fg` | Find git files (only inside a git repo) |
+| `Space e` | Toggle file tree |
+| `Space qq` | Quit Neovim completely (does not save) |
+| `Ctrl-s` | Save file (normal, insert and visual modes) |
+| `Ctrl-h` / `Ctrl-j` / `Ctrl-k` / `Ctrl-l` | Go to left / lower / upper / right window |
 
-Las búsquedas parten de la carpeta donde se abrió `nvim`, por lo que conviene abrirlo en la raíz del proyecto. LazyVim, en cambio, busca desde la raíz del proyecto.
+Searches start from the folder where `nvim` was opened, so it is best to open it at the project root. LazyVim, instead, searches from the project root.
 
-El árbol se abre automáticamente al iniciar, con 40 columnas de ancho y el cursor en el archivo. No se abre en mensajes de commit de git.
+The tree opens automatically on startup, 40 columns wide, with the cursor on the file. It does not open for git commit messages.
 
-### Archivos ocultos e ignorados
+### Hidden and ignored files
 
-Por defecto no aparecen algunos archivos, como `.env.local`:
+Some files, such as `.env.local`, are hidden by default:
 
-- **Árbol:** oculta los archivos listados en `.gitignore`. Los dotfiles sí se muestran.
-- **Búsqueda de archivos:** oculta los dotfiles (los que empiezan con `.`) y los archivos listados en `.gitignore`.
+- **Tree:** hides files listed in `.gitignore`. Dotfiles are shown.
+- **File search:** hides dotfiles (files starting with `.`) and files listed in `.gitignore`.
 
-Para verlos en el momento:
+To show them on demand:
 
-| Dónde | Tecla | Efecto |
+| Where | Key | Effect |
 |---|---|---|
-| Árbol | `I` | Mostrar u ocultar archivos de `.gitignore` |
-| Árbol | `H` | Mostrar u ocultar dotfiles |
-| Búsqueda | `Alt-h` | Incluir dotfiles |
-| Búsqueda | `Alt-i` | Incluir archivos de `.gitignore` |
+| Tree | `I` | Toggle `.gitignore` files |
+| Tree | `H` | Toggle dotfiles |
+| Search | `Alt-h` | Include dotfiles |
+| Search | `Alt-i` | Include `.gitignore` files |
 
-En macOS, `Alt` es la tecla Option **izquierda**. Está activado en Ghostty con `macos-option-as-alt = left`, así que la Option derecha sigue escribiendo acentos y `ñ`.
+On macOS, `Alt` is the **left** Option key. It is enabled in Ghostty with `macos-option-as-alt = left`, so the right Option key still types accents and `ñ`.
 
-Dentro del árbol, `Ctrl-k` muestra la información del archivo (atajo propio de nvim-tree) en lugar de cambiar de ventana.
+Inside the tree, `Ctrl-k` shows file info (nvim-tree's own keymap) instead of switching windows.
 
-### Dos editores en pantalla (ventanas divididas)
+### Two editors on screen (split windows)
 
-Mismos atajos que LazyVim:
+Same keymaps as LazyVim:
 
-| Atajo | Acción |
+| Keymap | Action |
 |---|---|
-| `Espacio \|` | Dividir la ventana a la derecha (dos editores lado a lado) |
-| `Espacio -` | Dividir la ventana abajo |
-| `Espacio wd` | Cerrar la ventana actual |
-| `Ctrl-h` / `Ctrl-j` / `Ctrl-k` / `Ctrl-l` | Moverse entre ventanas |
+| `Space \|` | Split window right (two editors side by side) |
+| `Space -` | Split window below |
+| `Space wd` | Close current window |
+| `Ctrl-h` / `Ctrl-j` / `Ctrl-k` / `Ctrl-l` | Move between windows |
 
-La ventana nueva muestra el mismo archivo. Para abrir otro, usar `Espacio Espacio` desde ella.
+The new window shows the same file. To open another one, use `Space Space` from it.
 
-Equivalentes nativos: `:vsplit` o `Ctrl-w v` (derecha), `:split` o `Ctrl-w s` (abajo), `Ctrl-w c` (cerrar). Para abrir un archivo directamente en una división: `:vsplit ruta/al/archivo`.
+Native equivalents: `:vsplit` or `Ctrl-w v` (right), `:split` or `Ctrl-w s` (below), `Ctrl-w c` (close). To open a file directly in a split: `:vsplit path/to/file`.
 
-## LSP y autocompletado
+## LSP and completion
 
-Usa el LSP nativo de Neovim (`vim.lsp.config` y `vim.lsp.enable`), sin `nvim-lspconfig` ni `mason`. Los errores aparecen al final de la línea.
+Uses Neovim's native LSP (`vim.lsp.config` and `vim.lsp.enable`), without `nvim-lspconfig` or `mason`. Diagnostics appear at the end of the line.
 
-| Atajo | Acción |
+| Keymap | Action |
 |---|---|
-| `gd` | Ir a la definición |
-| `K` | Ver documentación |
-| `grn` | Renombrar |
-| `grr` | Ver referencias |
-| `gra` | Acciones de código |
-| `gri` | Ir a la implementación |
+| `gd` | Go to definition |
+| `K` | Show documentation |
+| `grn` | Rename |
+| `grr` | Show references |
+| `gra` | Code actions |
+| `gri` | Go to implementation |
 
-Todos son nativos de Neovim excepto `gd`, que define esta configuración.
+All are native to Neovim except `gd`, which this configuration defines.
 
-El menú de autocompletado se abre solo al escribir caracteres de activación del servidor, como `.`. Al escribir solo letras no se abre; LazyVim, en cambio, lo abre con cada tecla.
+The completion menu opens only when typing the server's trigger characters, such as `.`. Typing only letters does not open it; LazyVim, instead, opens it on every keystroke.
 
-| Tecla | Acción |
+| Key | Action |
 |---|---|
-| `Ctrl-n` / `Ctrl-p` | Siguiente / anterior sugerencia |
-| `Ctrl-y` | Aceptar sugerencia (`Enter` no acepta) |
-| `Ctrl-x Ctrl-o` | Abrir el menú manualmente |
+| `Ctrl-n` / `Ctrl-p` | Next / previous suggestion |
+| `Ctrl-y` | Accept suggestion (`Enter` does not accept) |
+| `Ctrl-x Ctrl-o` | Open the menu manually |
 
-En modo insert, `Ctrl-s` guarda el archivo, por lo que reemplaza el atajo nativo de Neovim que muestra la firma de la función.
+In insert mode, `Ctrl-s` saves the file, so it replaces Neovim's native keymap that shows the function signature.
 
-## Opciones
+## Options
 
-| Opción | Efecto |
+| Option | Effect |
 |---|---|
-| `number` + `relativenumber` | La línea actual muestra su número real y las demás su distancia. `5j` baja 5 líneas, `3k` sube 3 |
-| `cursorline` | Resalta la línea actual |
-| `signcolumn = "yes"` | Margen fijo, para que no salte al aparecer errores o cambios de git |
-| `ignorecase` + `smartcase` | Búsqueda sin distinguir mayúsculas, salvo que se escriba alguna |
-| `showmode = false` | El modo se ve en la barra de estado, no abajo |
-| `scrolloff = 8` | Mantiene 8 líneas visibles arriba y abajo del cursor |
+| `number` + `relativenumber` | The current line shows its real number and the others their distance. `5j` moves down 5 lines, `3k` up 3 |
+| `cursorline` | Highlights the current line |
+| `signcolumn = "yes"` | Fixed sign column, so it does not shift when errors or git changes appear |
+| `ignorecase` + `smartcase` | Case-insensitive search, unless an uppercase letter is typed |
+| `showmode = false` | The mode is shown in the status line, not at the bottom |
+| `scrolloff = 8` | Keeps 8 lines visible above and below the cursor |
 
-Al copiar con `y`, el texto copiado parpadea brevemente.
+When yanking with `y`, the yanked text briefly flashes.
 
-## Formatear al guardar
+## Format on save
 
-Usa [conform.nvim](https://github.com/stevearc/conform.nvim) y se configura en `formatters_by_ft` dentro de `init.lua`.
+Uses [conform.nvim](https://github.com/stevearc/conform.nvim) and is configured in `formatters_by_ft` inside `init.lua`.
 
-| Lenguaje | Formateador | Cuándo |
+| Language | Formatter | When |
 |---|---|---|
-| Go | `gopls` (gofmt) | Siempre |
-| JS / TS / JSX / TSX | Prettier del proyecto (`node_modules`) | Solo si el proyecto tiene `.prettierrc` (u otro archivo de config de Prettier) o la clave `prettier` en `package.json` |
-| Resto | Ninguno | Nunca |
+| Go | `gopls` (gofmt) | Always |
+| JS / TS / JSX / TSX | Project Prettier (`node_modules`) | Only if the project has `.prettierrc` (or another Prettier config file) or a `prettier` key in `package.json` |
+| Others | None | Never |
 
-Si un proyecto JS/TS no usa Prettier, el archivo se guarda sin cambios. El formateador de `vtsls` no se usa nunca, porque no es Prettier y generaría diffs con otro estilo.
+If a JS/TS project does not use Prettier, the file is saved unchanged. The `vtsls` formatter is never used, because it is not Prettier and would produce diffs with a different style.
 
-## Comandos nativos de Neovim
+## Native Neovim commands
 
-Estos no dependen de esta configuración.
+These do not depend on this configuration.
 
-| Comando | Acción |
+| Command | Action |
 |---|---|
-| `/palabra` | Buscar en el archivo actual |
-| `n` / `N` | Resultado siguiente / anterior |
-| `h` `j` `k` `l` | Moverse |
-| `5j` / `3k` | Bajar 5 / subir 3 líneas (un número repite el comando) |
-| `gcc` / `gc` (visual) | Comentar o descomentar |
-| `Ctrl-w h` / `Ctrl-w l` | Cambiar de ventana |
-| `:w` | Guardar |
-| `:wa` | Guardar todos los archivos |
-| `:q` | Cerrar la ventana actual |
-| `:wqa` | Guardar todo y salir |
-| `:qa!` | Salir descartando cambios |
-| `:Tutor` | Tutorial interactivo |
+| `/word` | Search in the current file |
+| `n` / `N` | Next / previous match |
+| `h` `j` `k` `l` | Move |
+| `5j` / `3k` | Move down 5 / up 3 lines (a number repeats the command) |
+| `gcc` / `gc` (visual) | Toggle comment |
+| `Ctrl-w h` / `Ctrl-w l` | Switch window |
+| `:w` | Save |
+| `:wa` | Save all files |
+| `:q` | Close the current window |
+| `:wqa` | Save all and quit |
+| `:qa!` | Quit discarding changes |
+| `:Tutor` | Interactive tutorial |
 
-## Cambiar o agregar atajos
+## Changing or adding keymaps
 
-Los atajos están al final de `init.lua`:
+Keymaps are at the end of `init.lua`:
 
 ```lua
 vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Find files" })
 ```
 
-## Agregar plugins
+## Adding plugins
 
-Añadir la URL del repositorio a la lista de `vim.pack.add` en `init.lua` y reiniciar Neovim. Para actualizar los plugins instalados:
+Add the repository URL to the `vim.pack.add` list in `init.lua` and restart Neovim. To update installed plugins:
 
 ```vim
 :lua vim.pack.update()
