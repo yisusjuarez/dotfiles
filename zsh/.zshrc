@@ -5,6 +5,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin:$PATH"
 [ -d "$HOME/go/bin" ] && export PATH="$HOME/go/bin:$PATH"
 
+export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
+
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
 
 command -v starship >/dev/null && eval "$(starship init zsh)"

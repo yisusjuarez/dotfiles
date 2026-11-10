@@ -1,0 +1,32 @@
+gui:
+  nerdFontsVersion: "3"
+  theme:
+    activeBorderColor:
+      - "#ff79c6"
+      - bold
+    inactiveBorderColor:
+      - "#bd93f9"
+    searchingActiveBorderColor:
+      - "#8be9fd"
+      - bold
+    optionsTextColor:
+      - "#6272a4"
+    selectedLineBgColor:
+      - "#44475a"
+    inactiveViewSelectedLineBgColor:
+      - bold
+    cherryPickedCommitFgColor:
+      - "#6272a4"
+    cherryPickedCommitBgColor:
+      - "#8be9fd"
+    markedBaseCommitFgColor:
+      - "#8be9fd"
+    markedBaseCommitBgColor:
+      - "#f1fa8c"
+    unstagedChangesColor:
+      - "#ff5555"
+    defaultFgColor:
+      - "#f8f8f2"
+git:
+  diffRenderers:
+    - command: delta --dark --paging=never --syntax-theme=Dracula
