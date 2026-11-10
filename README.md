@@ -1,6 +1,6 @@
 # dotfiles
 
-Personal Neovim, zsh, Starship and Ghostty configuration, with the Dracula theme, managed with [GNU Stow](https://www.gnu.org/software/stow/).
+Personal Neovim, zsh, Starship, Ghostty and tmux configuration, with the Dracula theme, managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Structure
 
@@ -9,6 +9,7 @@ dotfiles/
 ├── ghostty/.config/ghostty/   -> ~/.config/ghostty
 ├── nvim/.config/nvim/         -> ~/.config/nvim
 ├── starship/.config/starship.toml -> ~/.config/starship.toml
+├── tmux/.config/tmux/         -> ~/.config/tmux
 └── zsh/
     ├── .zshrc                 -> ~/.zshrc
     └── .config/zsh/           -> ~/.config/zsh
@@ -31,6 +32,8 @@ Each top-level folder is a Stow package. Stow creates symlinks from `~` to the f
 
   `.zshrc` only loads each tool if it is installed, so the shell still works without them.
 
+tmux: `brew install tmux`. Shortcuts and basic usage are in [`tmux/.config/tmux/README.md`](tmux/.config/tmux/README.md).
+
 Neovim requirements (version, tools and LSP servers) are listed in [`nvim/.config/nvim/README.md`](nvim/.config/nvim/README.md).
 
 ## Installation
@@ -49,13 +52,14 @@ Neovim requirements (version, tools and LSP servers) are listed in [`nvim/.confi
    [ -e ~/.config/nvim ] && [ ! -L ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim.bak
    [ -e ~/.config/starship.toml ] && [ ! -L ~/.config/starship.toml ] && mv ~/.config/starship.toml ~/.config/starship.toml.bak
    [ -e ~/.config/ghostty ] && [ ! -L ~/.config/ghostty ] && mv ~/.config/ghostty ~/.config/ghostty.bak
+   [ -e ~/.config/tmux ] && [ ! -L ~/.config/tmux ] && mv ~/.config/tmux ~/.config/tmux.bak
    mkdir -p ~/.config
    ```
 
 3. Create the symlinks:
 
    ```sh
-   stow -t ~ --ignore='\.DS_Store' nvim zsh starship ghostty
+   stow -t ~ --ignore='\.DS_Store' nvim zsh starship ghostty tmux
    ```
 
    `-t ~` is required because the repo is not directly inside `~`. `--ignore` avoids conflicts with the `.DS_Store` files Finder creates.
@@ -63,7 +67,7 @@ Neovim requirements (version, tools and LSP servers) are listed in [`nvim/.confi
 4. Verify:
 
    ```sh
-   ls -la ~/.zshrc ~/.config/nvim ~/.config/starship.toml ~/.config/ghostty
+   ls -la ~/.zshrc ~/.config/nvim ~/.config/starship.toml ~/.config/ghostty ~/.config/tmux
    ```
 
    All must be symlinks pointing to this repo. Open a new terminal and `nvim` to confirm they load.
@@ -82,6 +86,7 @@ Everything uses [Dracula](https://draculatheme.com):
 | Starship | Custom prompt using the palette from [dracula/starship](https://github.com/dracula/starship) |
 | zsh-syntax-highlighting | [dracula/zsh-syntax-highlighting](https://github.com/dracula/zsh-syntax-highlighting), in `zsh/.config/zsh/dracula-syntax-highlighting.zsh` |
 | Neovim | [Mofiqul/dracula.nvim](https://github.com/Mofiqul/dracula.nvim) |
+| tmux | Status bar and borders set with the Dracula palette in `tmux.conf` |
 
 ## Local configuration
 
@@ -121,7 +126,7 @@ export PATH="$HOME/.opencode/bin:$PATH"
 
 ```sh
 cd ~/Documents/dotfiles
-stow -D -t ~ nvim zsh starship ghostty
+stow -D -t ~ nvim zsh starship ghostty tmux
 ```
 
 This removes only the symlinks; the repo files are not touched. The `*.bak` backups can be restored afterwards.
