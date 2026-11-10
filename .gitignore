@@ -1,0 +1,3 @@
+.zshrc.local
+*.bak
+.DS_Store
