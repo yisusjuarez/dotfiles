@@ -39,7 +39,7 @@ Installed versions are pinned in `nvim-pack-lock.json`.
 
 ## Font
 
-Neovim in the terminal uses the terminal's font. It is set in the Ghostty config (`~/Library/Application Support/com.mitchellh.ghostty/config.ghostty`):
+Neovim in the terminal uses the terminal's font. It is set in the Ghostty config (`ghostty/.config/ghostty/config.ghostty` in this repo):
 
 ```
 font-family = JetBrainsMono Nerd Font Mono
