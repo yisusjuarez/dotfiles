@@ -79,7 +79,7 @@ Everything uses [Dracula](https://draculatheme.com):
 | Tool | Source |
 |---|---|
 | Ghostty | Built-in `theme = Dracula` |
-| Starship | [dracula/starship](https://github.com/dracula/starship) (`starship.theme.toml`) |
+| Starship | Custom prompt using the palette from [dracula/starship](https://github.com/dracula/starship) |
 | zsh-syntax-highlighting | [dracula/zsh-syntax-highlighting](https://github.com/dracula/zsh-syntax-highlighting), in `zsh/.config/zsh/dracula-syntax-highlighting.zsh` |
 | Neovim | [Mofiqul/dracula.nvim](https://github.com/Mofiqul/dracula.nvim) |
 
