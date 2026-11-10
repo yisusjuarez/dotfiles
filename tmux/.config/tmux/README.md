@@ -2,13 +2,29 @@
 
 Config: [`tmux.conf`](tmux.conf). Requires tmux 3.x: `brew install tmux`.
 
+## Theme and plugins
+
+The status bar uses the official [Dracula theme](https://github.com/dracula/tmux), installed with [TPM](https://github.com/tmux-plugins/tpm). It shows the session name, windows, git branch, CPU, RAM and time.
+
+Plugins live in `~/.tmux/plugins`, outside this repo. First-time setup:
+
+```sh
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+~/.tmux/plugins/tpm/bin/install_plugins
+```
+
+| Action | Keys |
+|---|---|
+| Install plugins added to `tmux.conf` | `prefix I` |
+| Update plugins | `prefix U` |
+
 ## Prefix
 
 The prefix is **`Ctrl+Space`** (instead of the default `Ctrl+b`).
 
 Every shortcut below means: press `Ctrl+Space`, release, then press the key. For example, `prefix h` = `Ctrl+Space`, release, `h`.
 
-The session name on the left of the status bar turns pink while the prefix is active.
+The session name on the left of the status bar turns yellow while the prefix is active.
 
 ## Sessions
 
@@ -86,6 +102,6 @@ tmux new -s my-app
 claude
 ```
 
-Then `prefix \` to open a pane on the right for git (`git status`, `lazygit`, etc.). Move between both with `prefix h` / `prefix l`.
+Then `prefix \` to open a pane on the right and run `lazygit` there (shortcuts in `~/.config/lazygit/README.md`). Move between both with `prefix h` / `prefix l`.
 
 Next time: `tmux attach -t my-app`.

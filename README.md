@@ -1,6 +1,6 @@
 # dotfiles
 
-Personal Neovim, zsh, Starship, Ghostty and tmux configuration, with the Dracula theme, managed with [GNU Stow](https://www.gnu.org/software/stow/).
+Personal Neovim, zsh, Starship, Ghostty, tmux and lazygit configuration, with the Dracula theme, managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
 ## Structure
 
@@ -10,6 +10,7 @@ dotfiles/
 ├── nvim/.config/nvim/         -> ~/.config/nvim
 ├── starship/.config/starship.toml -> ~/.config/starship.toml
 ├── tmux/.config/tmux/         -> ~/.config/tmux
+├── lazygit/.config/lazygit/   -> ~/.config/lazygit
 └── zsh/
     ├── .zshrc                 -> ~/.zshrc
     └── .config/zsh/           -> ~/.config/zsh
@@ -32,7 +33,16 @@ Each top-level folder is a Stow package. Stow creates symlinks from `~` to the f
 
   `.zshrc` only loads each tool if it is installed, so the shell still works without them.
 
-tmux: `brew install tmux`. Shortcuts and basic usage are in [`tmux/.config/tmux/README.md`](tmux/.config/tmux/README.md).
+tmux: `brew install tmux`, then install the plugin manager and plugins:
+
+```sh
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+~/.tmux/plugins/tpm/bin/install_plugins
+```
+
+Shortcuts and basic usage are in [`tmux/.config/tmux/README.md`](tmux/.config/tmux/README.md).
+
+lazygit: `brew install lazygit git-delta`. Shortcuts are in [`lazygit/.config/lazygit/README.md`](lazygit/.config/lazygit/README.md).
 
 Neovim requirements (version, tools and LSP servers) are listed in [`nvim/.config/nvim/README.md`](nvim/.config/nvim/README.md).
 
@@ -53,13 +63,14 @@ Neovim requirements (version, tools and LSP servers) are listed in [`nvim/.confi
    [ -e ~/.config/starship.toml ] && [ ! -L ~/.config/starship.toml ] && mv ~/.config/starship.toml ~/.config/starship.toml.bak
    [ -e ~/.config/ghostty ] && [ ! -L ~/.config/ghostty ] && mv ~/.config/ghostty ~/.config/ghostty.bak
    [ -e ~/.config/tmux ] && [ ! -L ~/.config/tmux ] && mv ~/.config/tmux ~/.config/tmux.bak
+   [ -e ~/.config/lazygit ] && [ ! -L ~/.config/lazygit ] && mv ~/.config/lazygit ~/.config/lazygit.bak
    mkdir -p ~/.config
    ```
 
 3. Create the symlinks:
 
    ```sh
-   stow -t ~ --ignore='\.DS_Store' nvim zsh starship ghostty tmux
+   stow -t ~ --ignore='\.DS_Store' nvim zsh starship ghostty tmux lazygit
    ```
 
    `-t ~` is required because the repo is not directly inside `~`. `--ignore` avoids conflicts with the `.DS_Store` files Finder creates.
@@ -67,7 +78,7 @@ Neovim requirements (version, tools and LSP servers) are listed in [`nvim/.confi
 4. Verify:
 
    ```sh
-   ls -la ~/.zshrc ~/.config/nvim ~/.config/starship.toml ~/.config/ghostty ~/.config/tmux
+   ls -la ~/.zshrc ~/.config/nvim ~/.config/starship.toml ~/.config/ghostty ~/.config/tmux ~/.config/lazygit
    ```
 
    All must be symlinks pointing to this repo. Open a new terminal and `nvim` to confirm they load.
@@ -86,7 +97,8 @@ Everything uses [Dracula](https://draculatheme.com):
 | Starship | Custom prompt using the palette from [dracula/starship](https://github.com/dracula/starship) |
 | zsh-syntax-highlighting | [dracula/zsh-syntax-highlighting](https://github.com/dracula/zsh-syntax-highlighting), in `zsh/.config/zsh/dracula-syntax-highlighting.zsh` |
 | Neovim | [Mofiqul/dracula.nvim](https://github.com/Mofiqul/dracula.nvim) |
-| tmux | Status bar and borders set with the Dracula palette in `tmux.conf` |
+| tmux | [dracula/tmux](https://github.com/dracula/tmux), installed with TPM |
+| lazygit | Dracula palette in `config.yml`; diffs use delta's built-in `Dracula` syntax theme |
 
 ## Local configuration
 
@@ -126,7 +138,7 @@ export PATH="$HOME/.opencode/bin:$PATH"
 
 ```sh
 cd ~/Documents/dotfiles
-stow -D -t ~ nvim zsh starship ghostty tmux
+stow -D -t ~ nvim zsh starship ghostty tmux lazygit
 ```
 
 This removes only the symlinks; the repo files are not touched. The `*.bak` backups can be restored afterwards.
