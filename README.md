@@ -12,6 +12,7 @@ dotfiles/
 ├── tmux/.config/tmux/         -> ~/.config/tmux
 ├── lazygit/.config/lazygit/   -> ~/.config/lazygit
 └── zsh/
+    ├── .zprofile              -> ~/.zprofile
     ├── .zshrc                 -> ~/.zshrc
     └── .config/zsh/           -> ~/.config/zsh
 ```
@@ -58,6 +59,7 @@ Neovim requirements (version, tools and LSP servers) are listed in [`nvim/.confi
 2. Back up the existing configuration. Stow does not overwrite real files and stops if it finds one:
 
    ```sh
+   [ -e ~/.zprofile ] && [ ! -L ~/.zprofile ] && mv ~/.zprofile ~/.zprofile.bak
    [ -e ~/.zshrc ] && [ ! -L ~/.zshrc ] && mv ~/.zshrc ~/.zshrc.bak
    [ -e ~/.config/nvim ] && [ ! -L ~/.config/nvim ] && mv ~/.config/nvim ~/.config/nvim.bak
    [ -e ~/.config/starship.toml ] && [ ! -L ~/.config/starship.toml ] && mv ~/.config/starship.toml ~/.config/starship.toml.bak
@@ -78,7 +80,7 @@ Neovim requirements (version, tools and LSP servers) are listed in [`nvim/.confi
 4. Verify:
 
    ```sh
-   ls -la ~/.zshrc ~/.config/nvim ~/.config/starship.toml ~/.config/ghostty ~/.config/tmux ~/.config/lazygit
+   ls -la ~/.zprofile ~/.zshrc ~/.config/nvim ~/.config/starship.toml ~/.config/ghostty ~/.config/tmux ~/.config/lazygit
    ```
 
    All must be symlinks pointing to this repo. Open a new terminal and `nvim` to confirm they load.
@@ -100,7 +102,18 @@ Everything uses [Dracula](https://draculatheme.com):
 | tmux | [dracula/tmux](https://github.com/dracula/tmux), installed with TPM |
 | lazygit | Dracula palette in `config.yml`; diffs use delta's built-in `Dracula` syntax theme |
 
+## zsh startup files
+
+| File | Read by | Contains |
+|---|---|---|
+| `.zprofile` | Login shells (macOS terminals, tmux, IDEs running `zsh -l`) | Homebrew `PATH` (Apple Silicon, Intel or Linuxbrew) and nvm |
+| `.zshrc` | Interactive shells | Completion, prompt, plugins. Loads nvm only if `.zprofile` did not, so non-login terminals (common on Linux) still get `node` |
+
+Every tool is optional: if Homebrew or nvm is not installed, its lines are skipped.
+
 ## Local configuration
+
+`~/.zprofile` sources `~/.zprofile.local` if it exists, for machine-specific login environment.
 
 `~/.zshrc` sources `~/.zshrc.local` if it exists, after the base configuration and before the prompt and plugins. That file is not in the repo and is the place for:
 
